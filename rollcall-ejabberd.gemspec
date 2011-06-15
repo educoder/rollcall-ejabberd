@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = %q{ejabberd-rollcall}
+  s.name = %q{rollcall-ejabberd}
   s.version = "0.0.1"
   s.authors = ["Matt Zukowski"]
   s.date = %q{2011-06-15}
