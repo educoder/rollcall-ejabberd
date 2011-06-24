@@ -1,7 +1,7 @@
 module RollcallEjabberd::EjabberdRest
   def create_account_in_ejabberd
     unless @ejabberd_account_created
-      command = %{register "#{self.login}" "proto.encorelab.org" "#{self.encrypted_password}"}
+      command = %{register "#{self.login}" "#{RollcallEjabberd::DOMAIN}" "#{self.encrypted_password}"}
       ejabberd_rest_request(command)
       @ejabberd_account_created = true unless @ejabberd_error
     end
@@ -9,14 +9,14 @@ module RollcallEjabberd::EjabberdRest
 
   def update_account_in_ejabberd
     unless @ejabberd_account_created
-      command = %{change_password "#{self.login}" "proto.encorelab.org" "#{self.encrypted_password}"}
+      command = %{change_password "#{self.login}" "#{RollcallEjabberd::DOMAIN}" "#{self.encrypted_password}"}
       ejabberd_rest_request(command)
       @ejabberd_account_created = true unless @ejabberd_error
     end
   end
   
   def delete_account_in_ejabberd
-    command = %{unregister "#{self.login}" "proto.encorelab.org"}
+    command = %{unregister "#{self.login}" "#{RollcallEjabberd::DOMAIN}"}
     ejabberd_rest_request(command)
   end
 
