@@ -1,4 +1,4 @@
-module EjabberdRest
+module RollcallEjabberd::EjabberdRest
   def create_account_in_ejabberd
     unless @ejabberd_account_created
       command = %{register "#{self.login}" "proto.encorelab.org" "#{self.encrypted_password}"}
@@ -21,7 +21,7 @@ module EjabberdRest
   end
 
   def ejabberd_rest_request(command)
-    url = EJABBERD_MOD_REST_URL
+    url = RollcallEjabberd::MOD_REST_URL
     
     RestClient.log = Logger.new(STDOUT)
     begin

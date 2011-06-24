@@ -1,10 +1,11 @@
 require 'rest_client'
 require 'uri'
 require 'account'
+require 'ejabberd_rest'
 
 Account.class_eval do
   unless Rails.env == 'test'
-    include EjabberdRest
+    include RollcallEjabberd::EjabberdRest
   
     before_validation :create_account_in_ejabberd, :on => :create
     before_validation :update_account_in_ejabberd, :on => :update
