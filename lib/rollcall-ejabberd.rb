@@ -4,16 +4,26 @@ module RollcallEjabberd
 
     initializer 'ejabberd.initialize' do |app|
       if config.ejabberd.mod_rest_url
+        RollcallEjabberd::MODE = 'rest'
         RollcallEjabberd::MOD_REST_URL = config.ejabberd.mod_rest_url
+      else
+        RollcallEjabberd::MODE = 'cli'
         
-        if config.ejabberd.domain
-          RollcallEjabberd::DOMAIN = config.ejabberd.domain
+        if config.ejabberd.ctl_path
+          RollcallEjabberd::CTL = config.ejabberd.ctl_path
         else
-          RollcallEjabberd::DOMAIN = 'localhost'
+          RollcallEjabberd::CTL = 'ejabberdctl'
         end
-        
-        require 'account_callbacks'
       end
+      
+      if config.ejabberd.domain
+        RollcallEjabberd::DOMAIN = config.ejabberd.domain
+      else
+        RollcallEjabberd::DOMAIN = 'localhost'
+      end
+      
+      require 'account_callbacks'
     end
+    
   end
 end

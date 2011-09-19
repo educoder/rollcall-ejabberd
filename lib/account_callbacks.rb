@@ -1,11 +1,18 @@
 require 'rest_client'
 require 'uri'
 require 'account'
-require 'ejabberd_rest'
 
 Account.class_eval do
   unless Rails.env == 'test'
-    include RollcallEjabberd::EjabberdRest
+    if RollcallEjabberd::MODE == 'rest'
+      require 'ejabberd_rest'
+      include RollcallEjabberd::EjabberdRest
+      Rails.logger.debug "Loaded Ejabberd REST connector for domain #{RollcallEjabberd::DOMAIN}."
+    else
+      require 'ejabberd_cli'
+      include RollcallEjabberd::EjabberdCli
+      Rails.logger.debug "Loaded Ejabberd CLI connector for domain #{RollcallEjabberd::DOMAIN}."
+    end
   
     before_validation :create_account_in_ejabberd, :on => :create
     before_validation :update_account_in_ejabberd, :on => :update

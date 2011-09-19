@@ -9,9 +9,14 @@ module RollcallEjabberd::EjabberdRest
 
   def update_account_in_ejabberd
     unless @ejabberd_account_created
-      command = %{change_password "#{self.login}" "#{RollcallEjabberd::DOMAIN}" "#{self.encrypted_password}"}
-      ejabberd_rest_request(command)
-      @ejabberd_account_created = true unless @ejabberd_error
+      # this requires the 'mod_admin_extra' module... lets unregister and re-register instead
+      #command = %{change_password "#{self.login}" "#{RollcallEjabberd::DOMAIN}" "#{self.encrypted_password}"}
+      
+      delete_account_in_ejabberd
+      unless @ejabberd_error
+        create_account_in_ejabberd
+        @ejabberd_account_updated = true unless @ejabberd_error
+      end
     end
   end
   
