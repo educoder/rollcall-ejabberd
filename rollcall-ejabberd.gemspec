@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name = %q{rollcall-ejabberd}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
   s.authors = ["Matt Zukowski"]
-  s.date = %q{2011-06-15}
-  s.summary = %q{Rollcall plugin for Ejabberd management}
+  s.date = %q{2011-09-19}
+  s.summary = %q{Rollcall plugin for integration with ejabberd}
   s.email = %q{matt dot zukowski at utoronto dot ca}
   s.files = `git ls-files`.split("\n")
   s.homepage = %q{http://github.com/educoder/rollcall-ejabberd}
