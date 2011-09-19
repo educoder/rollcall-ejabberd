@@ -14,8 +14,8 @@ Account.class_eval do
       Rails.logger.debug "Loaded Ejabberd CLI connector for domain #{RollcallEjabberd::DOMAIN}."
     end
   
-    before_validation :create_account_in_ejabberd, :on => :create
-    before_validation :update_account_in_ejabberd, :on => :update
+    before_validation :create_account_in_ejabberd, :on => :create, :if => proc{ !login.blank? && !password.blank? }
+    before_validation :update_account_in_ejabberd, :on => :update, :if => proc{ !login.blank? && !password.blank? }
     before_destroy :delete_account_in_ejabberd
   
     validate do
