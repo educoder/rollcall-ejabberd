@@ -24,6 +24,15 @@ module RollcallEjabberd::EjabberdCli
     command = %{unregister "#{self.login}" "#{RollcallEjabberd::DOMAIN}"}
     ejabberd_cli_request(command)
   end
+  
+  def list_accounts_in_ejabberd
+    command = %{registered-users "#{RollcallEjabberd::DOMAIN}"}
+    ejabberd_cli_request(command)
+  end
+  
+  def ejabberd_account_exists?
+    list_accounts_in_ejabberd.split("\n").include?(login)
+  end
 
   def ejabberd_cli_request(command)
     ctl = RollcallEjabberd::CTL

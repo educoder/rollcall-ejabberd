@@ -24,6 +24,15 @@ module RollcallEjabberd::EjabberdRest
     command = %{unregister "#{self.login}" "#{RollcallEjabberd::DOMAIN}"}
     ejabberd_rest_request(command)
   end
+  
+  def list_accounts_in_ejabberd
+    command = %{registered-users "#{RollcallEjabberd::DOMAIN}"}
+    ejabberd_rest_request(command)
+  end
+  
+  def ejabberd_account_exists?
+    list_accounts_in_ejabberd.split("\n").include?(login)
+  end
 
   def ejabberd_rest_request(command)
     url = RollcallEjabberd::MOD_REST_URL
