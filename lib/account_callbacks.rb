@@ -19,9 +19,9 @@ Account.class_eval do
     before_destroy :delete_account_in_ejabberd
   
     validate do
-      if !@ejabberd_error && !ejabberd_account_exists?
-        @ejabberd_error = "#{login}@#{RollcallEjabberd::DOMAIN} does not exist on the ejabbberd server!"
-      end
+      # if !@ejabberd_error && !ejabberd_account_exists?
+      #   @ejabberd_error = "#{login}@#{RollcallEjabberd::DOMAIN} cannot be updated because it does not exist on the ejabbberd server!"
+      # end
       
       self.errors[:base] << @ejabberd_error if @ejabberd_error
     end
