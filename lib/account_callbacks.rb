@@ -15,7 +15,7 @@ Account.class_eval do
     end
   
     before_create :create_account_in_ejabberd, :if => proc{ !login.blank? && !password.blank? }
-    before_update :update_account_in_ejabberd, :if => proc{ !login.blank? && !password.blank? }
+    before_update :update_account_in_ejabberd, :if => proc{ !login.blank? && !password.blank? && password_changed? }
     before_destroy :delete_account_in_ejabberd
   
     validate do
